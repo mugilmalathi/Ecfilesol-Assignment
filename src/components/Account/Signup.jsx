@@ -9,14 +9,22 @@ const Signup = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  // const [logindata, setLogindata] = useState([]);
+  const [logindata, setLogindata] = useState([]);
+  const [email, setEmail] = useState("")
 
-  // useEffect(()=>{
-  //   axios.get("")
-  //   .then((res)=>{
-  //     setLogindata(res.data)
-  //   })
-  // }, [])
+  useEffect(()=>{
+    axios.get("https://ecfile-sol-backend.herokuapp.com/accAuth")
+    .then((res)=>{
+      setLogindata(res.data)
+      let datas = res.data;
+      datas.map((e)=>{
+        console.log(e.email, "bhsjghjgds")
+        setEmail(e.email)
+      })
+      
+    })
+  }, [])
+
 
   const navigate = useNavigate()
   const [data, setData] = useState({
@@ -37,15 +45,17 @@ const Signup = () => {
           password: "",
         });
       });
-      setSuccessMessage("")
       if(!emailValidator(data.email)){
         return setErrorMessage("Please Enter valid Email")
       }else if(!passwordValidator(data.password)){
         return setErrorMessage("Please Enter Valid Password")
       }else if(!mobileValidator(data.mobile)){
         return setErrorMessage("Please Enter valid Mobile Number")
+      }else if(email == data.email){
+        return setErrorMessage("Email already registered")
       }else{
         navigate("/login")
+        return setSuccessMessage("Successfully Registered")
       }
   };
 
@@ -62,9 +72,7 @@ const Signup = () => {
       <div className="signup-box">
         <h1>REGISTER</h1>
         {errorMessage.length > 0 && <div style={{ marginBottom: '10px', color: 'red' }}>{errorMessage}</div>}
-							{successMessage.length > 0 && (
-								<div style={{ marginBottom: '10px', color: 'green' }}>{successMessage}</div>
-							)}
+				{successMessage.length > 0 && (<div style={{ marginBottom: '10px', color: 'green' }}>{successMessage}</div>)}
         <input
           onChange={handleChange}
           value={data.name}
