@@ -3,6 +3,7 @@ import axios from "axios";
 import "./account.scss";
 import { useNavigate } from "react-router";
 import { emailValidator, mobileValidator, passwordValidator } from "./validate";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
 
@@ -114,6 +115,7 @@ const Signup = () => {
         />
         <br />
         <button onClick={handleSubmit}>Submit</button>
+        <div>Already have an account? <Link to="/login">Click Here</Link></div>
       </div>
     </div>
   );

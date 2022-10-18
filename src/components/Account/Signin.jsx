@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 import { emailValidator, passwordValidator } from './validate'
 
 const Signin = () => {
@@ -66,6 +67,7 @@ const Signin = () => {
         />
         <br />
         <button onClick={handleLogin}>Submit</button>
+        <div>New User? <Link to="/signup">Click Here</Link></div>
       </div>
     </div>
   )
