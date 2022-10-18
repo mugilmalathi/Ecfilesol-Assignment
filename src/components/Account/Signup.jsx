@@ -50,12 +50,15 @@ const Signup = () => {
         return setErrorMessage("Please Enter valid Email")
       }else if(!passwordValidator(data.password)){
         return setErrorMessage("Please Enter Valid Password")
+      }else if(data.mobile.length !== 10){
+        return setErrorMessage("Please Enter 10 Digit Mobile Number")
       }else if(!mobileValidator(data.mobile)){
-        return setErrorMessage("Please Enter valid Mobile Number")
+        return setErrorMessage("Please Enter valid Mobile Number Start with 6,7,8,9")
       }else if(email == data.email){
         return setErrorMessage("Email already registered")
       }else{
         navigate("/login")
+        alert("Successfully Registered")
         return setSuccessMessage("Successfully Registered")
       }
   };
